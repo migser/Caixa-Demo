@@ -50,6 +50,19 @@ trigger TaskTrigger on Task (after insert) {
 
 	update tasks;
 
+	List <Task> TareasAgen = [SELECT Accountid, Account.Sistem_tica__c
+   					   FROM Task 
+   					   where 
+   							 id in :ids
+   							 and Accountid <> null
+   							 and Account.Sistem_tica__c='En lista corta'];
+   	List<Account> upd_acc = new List<Account>();						 
+   	for (Task t : TareasAgen) {
+   		Account a = new Account (id = t.Accountid, Sistem_tica__c='Agendado');
+   		upd_acc.add(a);
+   	}
+   	update upd_acc;
+
 		System.debug('Procesando Tareas --> OK');
 		
 
