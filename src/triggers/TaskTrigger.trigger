@@ -51,6 +51,7 @@ trigger TaskTrigger on Task (after insert) {
 	update tasks;
 
 	//Cambia de estado las accounts a las que se les crea una tarea a Agendadas si eran lista corta
+	// 22/07/2015
 
 	List <Task> TareasAgen = [SELECT Accountid, Account.Sistem_tica__c
    					   FROM Task 
